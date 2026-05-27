@@ -26,7 +26,7 @@ struct MainContent: View {
             }
             
             NavigationStack {
-//                ProfileView()
+                ProfileView()
             }
             .tabItem {
                 Label("Profile", systemImage: "person")

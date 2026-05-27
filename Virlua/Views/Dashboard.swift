@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+internal import Auth
 
 struct DashboardView: View {
     @Environment(\.appTheme) private var theme
@@ -21,7 +22,7 @@ struct DashboardView: View {
                     Text("Dashboard")
                         .h2Style()
                         .foregroundColor(theme.colors.foreground)
-                    Text("Welcome back, \(auth.userEmail ?? "")!")
+                    Text("Welcome back, \(auth.user?.email ?? "")!")
                         .smallStyle()
                         .foregroundColor(theme.colors.mutedForeground)
                 }

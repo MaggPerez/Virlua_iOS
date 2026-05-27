@@ -253,7 +253,7 @@ struct RegisterView: View {
             return
         }
 
-        await auth.signUp(email: email, password: password)
+        await auth.signUp(email: email, password: password, firstName: firstName, lastName: lastName)
 
         if let error = auth.errorMessage {
             alertMessage = error
