@@ -11,16 +11,18 @@ import SwiftUI
 struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
+
     @State private var showPassword: Bool = false
-    @State private var showMainContent: Bool = false
     @State private var showRegister: Bool = false
+    @State private var showAlert: Bool = false
+
+    @State private var alertMessage: String = ""
 
     @Environment(\.appTheme) private var theme
+    @Environment(SupabaseAuthManager.self) private var auth
 
     var body: some View {
-        if showMainContent {
-            MainContent()
-        } else if showRegister {
+        if showRegister {
             RegisterView()
         } else {
             ScrollView {
@@ -154,12 +156,17 @@ struct LoginView: View {
 
                 // Login button
                 Button {
-                    login()
+                    Task { await login() }
                 } label: {
                     Text("Login")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(PrimaryButtonStyle())
+                .alert("Login Failed", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(alertMessage)
+                }
 
                 // Sign up link
                 HStack(spacing: 4) {
@@ -188,15 +195,23 @@ struct LoginView: View {
         .padding(.horizontal, 24)
     }
 
-    func login() {
+    private func login() async {
         guard !email.isEmpty, !password.isEmpty else {
-            print("One of the fields is empty")
+            alertMessage = "Please enter your email and password"
+            showAlert = true
             return
         }
-        showMainContent = true
+
+        await auth.signIn(email: email, password: password)
+
+        if let error = auth.errorMessage {
+            alertMessage = error
+            showAlert = true
+        }
     }
 }
 
 #Preview {
     LoginView()
+        .environment(SupabaseAuthManager())
 }

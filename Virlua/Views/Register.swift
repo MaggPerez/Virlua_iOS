@@ -16,15 +16,15 @@ struct RegisterView: View {
     @State private var confirmPassword: String = ""
     @State private var showPassword: Bool = false
     @State private var showConfirmPassword: Bool = false
-    @State private var showMainContent: Bool = false
     @State private var showLogin: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
 
     @Environment(\.appTheme) private var theme
+    @Environment(SupabaseAuthManager.self) private var auth
 
     var body: some View {
-        if showMainContent {
-            MainContent()
-        } else if showLogin {
+        if showLogin {
             LoginView()
         } else {
             ScrollView {
@@ -200,12 +200,17 @@ struct RegisterView: View {
 
                 // Create Account button
                 Button {
-                    register()
+                    Task { await register() }
                 } label: {
                     Text("Create Account")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(PrimaryButtonStyle())
+                .alert("Registration Failed", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(alertMessage)
+                }
 
                 // Sign in link
                 HStack(spacing: 4) {
@@ -234,22 +239,30 @@ struct RegisterView: View {
         .padding(.horizontal, 24)
     }
 
-    func register() {
+    private func register() async {
         guard !firstName.isEmpty, !lastName.isEmpty, !email.isEmpty,
               !password.isEmpty, !confirmPassword.isEmpty else {
-            print("One or more fields are empty")
+            alertMessage = "Please fill in all fields"
+            showAlert = true
             return
         }
 
-        if password != confirmPassword {
-            print("Passwords don't match")
+        guard password == confirmPassword else {
+            alertMessage = "Passwords don't match"
+            showAlert = true
             return
         }
 
-        showMainContent = true
+        await auth.signUp(email: email, password: password, firstName: firstName, lastName: lastName)
+
+        if let error = auth.errorMessage {
+            alertMessage = error
+            showAlert = true
+        }
     }
 }
 
 #Preview {
     RegisterView()
+        .environment(SupabaseAuthManager())
 }

@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftUI
+internal import Auth
 
 struct DashboardView: View {
     @Environment(\.appTheme) private var theme
+    @Environment(SupabaseAuthManager.self) private var auth
 
     var body: some View {
         ScrollView {
@@ -20,7 +22,7 @@ struct DashboardView: View {
                     Text("Dashboard")
                         .h2Style()
                         .foregroundColor(theme.colors.foreground)
-                    Text("Welcome back!")
+                    Text("Welcome back, \(auth.user?.email ?? "")!")
                         .smallStyle()
                         .foregroundColor(theme.colors.mutedForeground)
                 }
@@ -51,6 +53,7 @@ struct DashboardView: View {
     }
 }
 
+
 // MARK: - Stat card
 
 private struct StatCard: View {
@@ -75,5 +78,6 @@ private struct StatCard: View {
 
 #Preview {
     DashboardView()
+        .environment(SupabaseAuthManager())
         .appTheme()
 }
