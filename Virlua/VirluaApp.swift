@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct VirluaApp: App {
+    @State private var supabaseAuthManager = SupabaseAuthManager()
+    
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .environment(supabaseAuthManager)
                 .appTheme()
         }
     }

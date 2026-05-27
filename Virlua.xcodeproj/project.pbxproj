@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		38B903262FC74984002394A9 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 38B903252FC74984002394A9 /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		380A063A2FBB838300DB7934 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +33,22 @@
 		380A06432FBB838300DB7934 /* VirluaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirluaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		38B9032E2FC755D7002394A9 /* Exceptions for "Virlua" folder in "Virlua" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 380A062B2FBB838200DB7934 /* Virlua */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		380A062E2FBB838200DB7934 /* Virlua */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				38B9032E2FC755D7002394A9 /* Exceptions for "Virlua" folder in "Virlua" target */,
+			);
 			path = Virlua;
 			sourceTree = "<group>";
 		};
@@ -52,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B903262FC74984002394A9 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +96,7 @@
 				380A062E2FBB838200DB7934 /* Virlua */,
 				380A063C2FBB838300DB7934 /* VirluaTests */,
 				380A06462FBB838300DB7934 /* VirluaUITests */,
+				38B903222FC74965002394A9 /* Frameworks */,
 				380A062D2FBB838200DB7934 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +109,13 @@
 				380A06432FBB838300DB7934 /* VirluaUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38B903222FC74965002394A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +138,7 @@
 			);
 			name = Virlua;
 			packageProductDependencies = (
+				38B903252FC74984002394A9 /* Supabase */,
 			);
 			productName = Virlua;
 			productReference = 380A062C2FBB838200DB7934 /* Virlua.app */;
@@ -195,6 +222,9 @@
 			);
 			mainGroup = 380A06232FBB838200DB7934;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				38B9030E2FC7479C002394A9 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 380A062D2FBB838200DB7934 /* Products */;
 			projectDirPath = "";
@@ -271,6 +301,8 @@
 /* Begin XCBuildConfiguration section */
 		380A064B2FBB838300DB7934 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 380A062E2FBB838200DB7934 /* Virlua */;
+			baseConfigurationReferenceRelativePath = "Secrets​.xcconfig";
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -335,6 +367,8 @@
 		};
 		380A064C2FBB838300DB7934 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 380A062E2FBB838200DB7934 /* Virlua */;
+			baseConfigurationReferenceRelativePath = "Secrets​.xcconfig";
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -400,6 +434,7 @@
 				DEVELOPMENT_TEAM = B9T3566J33;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Virlua/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +467,7 @@
 				DEVELOPMENT_TEAM = B9T3566J33;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Virlua/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -578,6 +614,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		38B9030E2FC7479C002394A9 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		38B903252FC74984002394A9 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38B9030E2FC7479C002394A9 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 380A06242FBB838200DB7934 /* Project object */;
 }

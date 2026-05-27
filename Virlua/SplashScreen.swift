@@ -18,6 +18,7 @@ enum SplashDestination {
 
 struct SplashScreenView: View {
     @Environment(\.appTheme) private var theme
+    @Environment(SupabaseAuthManager.self) private var auth
 
     @State private var destination: SplashDestination?
 
@@ -39,18 +40,24 @@ struct SplashScreenView: View {
 
     var body: some View {
         Group {
-            switch destination {
-            case .login:
-                LoginView()
+            if auth.isAuthenticated {
+                MainContent()
                     .transition(.move(edge: .trailing).combined(with: .opacity))
-            case .register:
-                RegisterView()
-                    .transition(.move(edge: .trailing).combined(with: .opacity))
-            case nil:
-                splashContent
-                    .transition(.opacity)
+            } else {
+                switch destination {
+                case .login:
+                    LoginView()
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                case .register:
+                    RegisterView()
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                case nil:
+                    splashContent
+                        .transition(.opacity)
+                }
             }
         }
+        .animation(.easeInOut(duration: 0.4), value: auth.isAuthenticated)
         .animation(.easeInOut(duration: 0.4), value: destination)
     }
 
@@ -360,6 +367,7 @@ struct BlinkingCursor: View {
 
 #Preview {
     SplashScreenView()
+        .environment(SupabaseAuthManager())
         .appTheme()
         .preferredColorScheme(.dark)
 }
