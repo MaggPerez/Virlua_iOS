@@ -11,7 +11,8 @@ import SwiftUI
 struct VirluaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView()
+                .appTheme()
         }
     }
 }
